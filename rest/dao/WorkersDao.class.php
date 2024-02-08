@@ -16,7 +16,7 @@ class WorkersDao
       $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
       // set the PDO error mode to exception
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
+      echo "Connected successfully \n";
 
       $stmt = $this->conn->prepare("SELECT * FROM workers");
       $stmt->execute();
@@ -39,7 +39,21 @@ class WorkersDao
   // Method used to add worker to db
   public function add($firstName, $lastName)
   {
-    $stmt = $this->conn->prepare("INSERT INTO workers (firstName, lastName) VALUES ('$firstName','$lastName')");
-    $result = $stmt->execute();
+    $stmt = $this->conn->prepare("INSERT INTO workers (firstName, lastName) VALUES (?,?)");
+    $result = $stmt->execute([$firstName, $lastName]);
+  }
+
+  // Method to update worker from db
+  public function update($id, $firstName, $lastName)
+  {
+    $stmt = $this->conn->prepare("UPDATE workers  SET firstName=?, lastName=? WHERE id = ?");
+    $result = $stmt->execute([$firstName, $lastName, $id]);
+  }
+
+  // Method used to delete worker from db
+  public function delete($id)
+  {
+    $stmt = $this->conn->prepare("DELETE FROM workers WHERE id =?");
+    $stmt->execute([$id]);
   }
 }

@@ -1,7 +1,7 @@
 <?php
 
-require_once("rest/dao/WorkersDao.class.php");
-$workers_dao = new WorkersDao();
+require_once("./rest/dao/WorkersDao.class.php");
+$workersDao = new WorkersDao();
 
 $type = $_REQUEST['type'];
 
@@ -17,19 +17,24 @@ switch ($type) {
 
     case "delete":
 
-        print_r("delete");
+        $id = $_REQUEST['id'];
+        $result = $workersDao->delete($id);
         break;
 
     case "update":
 
-        print_r("update");
+        $id = $_REQUEST['id'];
+        $firstName = $_REQUEST['firstName'];
+        $lastName = $_REQUEST['lastName'];
+        $result = $workersDao->update($id, $firstName, $lastName);
+        print_r($result);
         break;
 
     case "get":
 
     default:
 
-        $results = $workers_dao->getAll();
+        $results = $workersDao->getAll();
         print_r($results);
         break;
 }

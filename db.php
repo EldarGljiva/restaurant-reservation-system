@@ -1,8 +1,8 @@
 <?php
 
 require_once("rest/dao/WorkersDao.class.php");
-$workers_dao = new WorkersDao();
-$results = $workers_dao->getAll();
+$workersDao = new WorkersDao();
+$results = $workersDaos->getAll();
 print_r($results);
 
 /*
