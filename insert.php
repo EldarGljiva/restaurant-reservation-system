@@ -1,14 +1,12 @@
 <?php
 
 require_once("rest/dao/WorkersDao.class.php");
+
 $workersDao = new WorkersDao();
 $firstName = $_REQUEST['firstName'];
 $lastName = $_REQUEST['lastName'];
 $result = $workersDao->add($firstName, $lastName);
 print_r($result);
-
-
-
 
 /*
 $servername = "localhost";
