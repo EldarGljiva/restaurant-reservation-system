@@ -3,11 +3,11 @@
 // Include flightPHP
 require "../vendor/autoload.php";
 
-require "./services/WorkerService.php";
+require "./services/CustomerService.php";
 
-Flight::register("workerService", "WorkerService");
+Flight::register("customerService", "CustomerService");
 
-require_once "routes/WorkerRoutes.php";
+require_once "routes/CustomerRoutes.php";
 
 // Default route
 Flight::route("/", function () {

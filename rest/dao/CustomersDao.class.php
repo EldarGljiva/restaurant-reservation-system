@@ -2,12 +2,12 @@
 
 require "BaseDao.class.php";
 
-class WorkersDao extends BaseDao
+class CustomersDao extends BaseDao
 {
   // Class constructor used to establish connection to db
   public function __construct()
   {
-    parent::__construct("workers");
+    parent::__construct("customer");
   }
 
   /*

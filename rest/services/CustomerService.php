@@ -1,14 +1,14 @@
 <?php
 
 require "BaseService.php";
-require __DIR__ . '/../dao/WorkersDao.class.php';
+require __DIR__ . '/../dao/CustomersDao.class.php';
 
-class WorkerService extends BaseService
+class CustomerService extends BaseService
 {
 
     public function __construct()
     {
-        parent::__construct(new WorkersDao);
+        parent::__construct(new CustomersDao);
     }
 
     /*
