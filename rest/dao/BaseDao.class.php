@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../Config.class.php";
+require __DIR__ . "/../Config.class.php";
 
 class BaseDao
 {
@@ -10,7 +10,6 @@ class BaseDao
     // Class constructor used to establish connection to db
     public function __construct($table_name)
     {
-
         try {
             $this->table_name = $table_name;
             $servername = Config::DB_HOST();

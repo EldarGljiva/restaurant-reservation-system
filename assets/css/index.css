@@ -1,3 +1,11 @@
+html {
+  height: 100%;
+}
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+}
 .flex-row {
   display: flex;
   justify-content: center;
@@ -15,27 +23,37 @@
   position: sticky;
   top: 0;
   z-index: 1000; /* Ensure it's above other elements */
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
-  background-color: #fff; /* Optional: Change background color */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   height: 4rem;
 }
 .navbar-nav .nav-link {
-  color: #000000; /* Change color to white */
+  color: #000000;
   font-size: 15px;
 }
 .navbar-nav .nav-link:hover {
-  color: #3e3d38; /* Change color to white */
+  color: #198754;
+}
+
+.nav-item:hover .nav-link {
+  color: #198754 !important; /* Change to your desired hover color */
 }
 
 #text-over-image {
   font-family: "Playfair Display", serif;
   -webkit-text-stroke: 1px #ffffff; /* Black outline */
-  font-size: 7rem; /* Adjust font size as needed */
+  font-size: 7rem;
   color: #000000;
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 3rem !important; /* Adjust font size for smaller screens */
+    font-size: 3rem !important;
   }
+}
+
+#footer {
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
