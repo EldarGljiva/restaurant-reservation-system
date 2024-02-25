@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--reservation.css-->
+    <link href="../assets/css/reservation.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="container d-flex justify-content-center align-items-center min-vh-100"
+    >
+      <div class="row border rounded-5 p-3 bg-light shadow box-area">
+        <div
+          class="col-md-6 left-box d-flex justify-content-center align-items-center"
+        >
+          <div class="featured-image">
+            <img
+              src="./assets/images/reservation.png"
+              alt="reservation"
+              class="img-fluid rounded-5"
+              width="350px"
+            />
+          </div>
+        </div>
+        <!--Right box-->
+        <div class="col-md-6 right-box">
+          <div class="row align-items-center">
+            <div class="header-text">
+              <p style="font-size: 24px; color: #000; font-weight: bold">
+                Table Reservation
+              </p>
+            </div>
+            <!--Email-->
+            <div class="input-group mb-3">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email address"
+              />
+            </div>
+            <!-- Number of Seats -->
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="numSeats"
+                >Number of Seats</label
+              >
+              <select class="form-select" id="numSeats">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+            <!--Date-->
+            <div class="input-group mb-3">
+              <input
+                type="date"
+                class="form-control"
+                placeholder="Date"
+                id="reservationDate"
+              />
+            </div>
+            <!--Button-->
+            <div class="input-group mb-3">
+              <button type="submit" class="btn btn-success w-100 fs-6">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Get today's date in the format YYYY-MM-DD
+      var today = new Date().toISOString().split("T")[0];
+
+      // Set the minimum date for the input field
+      document.getElementById("reservationDate").setAttribute("min", today);
+    </script>
+  </body>
+</html>

@@ -3,9 +3,9 @@
 // Include flightPHP
 require "../vendor/autoload.php";
 
-require "services/CustomerService.php";
+//require "services/CustomerService.php";
 // Works when one of them is commented
-//require "services/MenuItemsService.php";
+require "services/MenuItemsService.php";
 // require "services/AdminService.php";
 // require "services/RestaurantTableService.php";
 // require "services/BookingService.php";

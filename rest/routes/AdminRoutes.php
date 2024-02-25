@@ -1,8 +1,8 @@
 <?php
 
-// Route
-Flight::route("POST /admin", function () {
-    Flight::json(["message" => "Item added to Menu Succesfully", "data" => Flight::adminService()->add(Flight::request()->data->getData())]);
+// Route used to get all admins from db
+Flight::route("GET /admins", function () {
+    Flight::json(Flight::adminService()->getAll());
 });
 
 // Route used to get menu items by id from db

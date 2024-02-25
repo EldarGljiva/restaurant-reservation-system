@@ -1,8 +1,8 @@
 <?php
 
-// Route
-Flight::route("POST /restauranttable", function () {
-    Flight::json(["message" => "Item added to Menu Succesfully", "data" => Flight::restauranttableService()->add(Flight::request()->data->getData())]);
+// Route used to get all tables of restaurant from db
+Flight::route("GET /restauranttables", function () {
+    Flight::json(Flight::restauranttableService()->getAll());
 });
 
 // Route used to get menu items by id from db
