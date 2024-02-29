@@ -117,12 +117,11 @@ $(document).ready(function () {
     } else {
       // If form is invalid, show error messages
       console.log("Form is invalid, cannot submit.");
-      toastr.error("Please fix the errors before submitting.");
+      toastr.error("Please fix errors before submitting.");
     }
   });
 });
 
-//
 // Function to Delete MenuItem from db
 function deleteMenuItem() {
   $.ajax({

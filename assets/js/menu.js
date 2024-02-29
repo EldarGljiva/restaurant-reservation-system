@@ -16,9 +16,7 @@ function getAllMenuItems() {
         "</p>" +
         "</div>" +
         "</div>" +
-        "</div>" +
-        "<button class='btn btn-danger' onClick='deleteMenuItem()'>Delete</button>" +
-        "<button class='btn btn-info' onClick='editMenuItem()'>Edit</button>";
+        "</div>";
     }
     $("#menuItems").html(html);
   });

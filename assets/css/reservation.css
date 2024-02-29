@@ -1,3 +1,7 @@
 .box-area {
   width: 900px;
 }
+label.error {
+  display: block;
+  color: red;
+}

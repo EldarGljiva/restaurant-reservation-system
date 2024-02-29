@@ -32,6 +32,12 @@ class BaseDao
         }
     }
 
+    // Method to get database connection
+    protected function getConnection()
+    {
+        return $this->conn;
+    }
+
     // Method used to get all entities from db
     public function getAll()
     {
