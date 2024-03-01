@@ -1,3 +1,6 @@
+// Calling function to get all menu items
+getAllMenuItems();
+
 // Function to get all menu items
 function getAllMenuItems() {
   $.get("rest/menuitems", function (data) {

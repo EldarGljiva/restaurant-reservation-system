@@ -1,3 +1,6 @@
+// Calling function to get all menu items
+getAllMenuItems();
+
 // Function to get all menu items
 function getAllMenuItems() {
   $.get("rest/menuitems", function (data) {
@@ -6,7 +9,7 @@ function getAllMenuItems() {
       html +=
         '<div class="col-lg-4 mb-2">' +
         '<div class="card">' +
-        '<img src="./assets/images/food1.jpg" class="card-img-top" alt="..." />' +
+        '<img src="assets/images/food1.jpg" class="card-img-top" alt="..." />' +
         '<div class="card-body">' +
         '<h5 class="card-title">' +
         data[i].foodName +
@@ -21,6 +24,3 @@ function getAllMenuItems() {
     $("#menuItems").html(html);
   });
 }
-
-// Function to Edit MenuItem
-function editMenuItem() {}

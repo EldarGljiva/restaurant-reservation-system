@@ -29,6 +29,7 @@ $(document).ready(function () {
       console.log("Form is valid, submitting...");
       $.post("rest/bookings", $("#reservationForm").serialize())
         .done(function () {
+          console.log("Form submitted succesfully");
           toastr.success("Reservation was succesfull");
           $("#reservationForm")[0].reset(); // Reset form after successful submission
         })
@@ -48,7 +49,12 @@ function getAllTables() {
   $.get("rest/restauranttables", function (data) {
     var html = "";
     for (let i = 0; i < data.length; i++) {
-      html += '<option value="2">' + data[i].tableNumber + "</option>";
+      html +=
+        '<option value="' +
+        data[i].tableNumber +
+        '">' +
+        data[i].tableNumber +
+        "</option>";
     }
     $("#table").html(html);
   });
