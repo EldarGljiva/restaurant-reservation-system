@@ -1,13 +1,36 @@
-var HashChange = function () {
-  var hash = window.location.hash;
-  if (hash.startsWith("#") && hash.length > 2) {
-    hash = hash.replace("#", "");
-    var file = "tpl/" + hash + ".html";
-    $("#AppContainer").load(file);
+// Function to check if the user is an admin
+function checkUserRole() {
+  // Get the token from localStorage
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    try {
+      // Decode the token to get payload data
+      const decoded = jwt_decode(token);
+
+      // Access the role from the decoded data
+      const role = decoded.role;
+
+      // Check if the role is "admin" or "customer"
+      if (role === "admin") {
+        console.log("User is an admin");
+        document.getElementById("adminLink").style.display = "block";
+      } else if (role === "customer") {
+        console.log("User is a customer");
+      } else {
+        console.log("Unknown role");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
   } else {
-    var defaultFile = "tpl/home.html"; // Set the default file here
-    $("#AppContainer").load(defaultFile);
+    console.log("Token not found");
+    // Handle case where token is not found in localStorage
+    return "not_found"; // Return a "not_found" role
   }
-};
-window.onhashchange = HashChange;
-HashChange();
+}
+
+// Call the checkUserRole function when the document is ready
+$(document).ready(function () {
+  checkUserRole();
+});

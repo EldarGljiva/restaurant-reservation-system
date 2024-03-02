@@ -49,12 +49,14 @@ function getAllTables() {
   $.get("rest/restauranttables", function (data) {
     var html = "";
     for (let i = 0; i < data.length; i++) {
-      html +=
-        '<option value="' +
-        data[i].tableNumber +
-        '">' +
-        data[i].tableNumber +
-        "</option>";
+      if (data[i].reserved !== 1) {
+        html +=
+          '<option value="' +
+          data[i].tableNumber +
+          '">' +
+          data[i].tableNumber +
+          "</option>";
+      }
     }
     $("#table").html(html);
   });

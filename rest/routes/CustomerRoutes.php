@@ -1,5 +1,10 @@
 <?php
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
+
 // Route used to get all customers from db
 Flight::route("GET /customers", function () {
     Flight::json(Flight::customerService()->getAll());
@@ -20,7 +25,32 @@ Flight::route("POST /customers", function () {
     Flight::json(["message" => "Customer added Succesfully", "data" => Flight::customerService()->add(Flight::request()->data->getData())]);
 });
 
-// Route used to edit customer from db
-Flight::route("PUT /customers/@id", function ($id) {
-    Flight::json(["message" => "Customer changed Successfully", "data" => Flight::customerService()->update($id, Flight::request()->data->getData())]);
+Flight::route("POST /customers/login", function () {
+    $data = Flight::request()->data->getData();
+
+    // Check if we are getting the correct data
+    error_log(json_encode($data)); // Check what data we are receiving
+
+    // Check if email and password are provided
+    if (!empty($data['email']) && !empty($data['password'])) {
+        // Get customer by email from db
+        $customer = Flight::customerService()->getByEmail($data['email']);
+        error_log(json_encode($customer));
+
+        // Verify the password   && password_verify($data['password'], $customer['password'])
+        if ($customer) {
+            $tokenData = [
+                "customer_id" => $customer['id'],
+                "email" => $customer['email'],
+                "role" => $customer['role'],
+            ];
+            // Generate JWT token
+            $jwt = JWT::encode($tokenData, "web", 'HS256');
+            Flight::json(["message" => "Customer Logged In Successfully", "token" => $jwt]);
+        } else {
+            Flight::json(["message" => "Invalid email or password"], 401);
+        }
+    } else {
+        Flight::json(["message" => "Email and password are required"], 400);
+    }
 });

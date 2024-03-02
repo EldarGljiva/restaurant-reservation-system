@@ -20,6 +20,14 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <!-- Toastr CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- index.css -->
     <link href="assets/css/index.css" rel="stylesheet" />
     <!--login.css-->
@@ -27,8 +35,6 @@
     <!--reservation.css-->
     <link href="assets/css/reservation.css" rel="stylesheet" />
 
-    <!--home.js-->
-    <script src="assets/js/home.js" type="text/javascript"></script>
     <!--index.js-->
     <script src="assets/js/index.js" type="text/javascript"></script>
     <!--login.js-->
@@ -37,6 +43,8 @@
     <script src="assets/js/reservation.js" type="text/javascript"></script>
     <!--menu.js-->
     <script src="assets/js/menu.js" type="text/javascript"></script>
+    <!-- Include jwt_decode for decoding JWT tokens -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <!-- PlayFair font style -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,6 +59,21 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      #AppContainer {
+        flex: 1;
+      }
+
+      #footer {
+        flex-shrink: 0;
+      }
+    </style>
   </head>
   <body>
     <!-- NavBar -->
@@ -85,6 +108,11 @@
             <li class="nav-item">
               <a class="nav-link" href="#reservation">Make Reservation</a>
             </li>
+            <!-- Conditional links based on user role -->
+            <li class="nav-item" id="adminLink" style="display: none">
+              <a class="nav-link" href="#admin">Admin Dashboard</a>
+            </li>
+            <!-- End of conditional links -->
             <li class="nav-item">
               <a class="nav-link" href="#login">Login</a>
             </li>
@@ -122,6 +150,7 @@
   </body>
 </html>
 <script>
+  // Code for single page application
   var HashChange = function () {
     var hash = window.location.hash;
     if (hash.startsWith("#") && hash.length > 2) {
@@ -135,4 +164,12 @@
   };
   window.onhashchange = HashChange;
   HashChange();
+
+  //CustomerService.init();
+
+  // JWT token
+  var token = localStorage.getItem("token");
+  if (!token) {
+    window.location.replace("index.html#login");
+  }
 </script>

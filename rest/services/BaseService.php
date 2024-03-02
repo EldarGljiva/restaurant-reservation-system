@@ -33,4 +33,8 @@ class BaseService
     {
         return $this->dao->delete($id);
     }
+    public function getByEmail($email)
+    {
+        return $this->dao->getByEmail($email);
+    }
 }

@@ -93,8 +93,25 @@ class BaseDao
         $query = substr($query, 0, -2);
         $query .= " WHERE id = :id";
         $entity['id'] = $id;
-        $stmt = $this->conn->prepare($query); //UPDATE workers SET firstName=?, lastName=? WHERE id = ?
+        $stmt = $this->conn->prepare($query);
         $stmt->execute($entity);
         return $entity;
+    }
+
+    // Method used to get entity by id
+    public function getByEmail($email)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table_name . " WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch();
+    }
+
+
+    // Query method
+    public function query($query, $params)
+    {
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
