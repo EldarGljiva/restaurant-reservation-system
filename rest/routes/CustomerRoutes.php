@@ -21,8 +21,8 @@ Flight::route("DELETE /customers/@id", function ($id) {
 });
 
 // Route used to add customer to db
-Flight::route("POST /customers", function () {
-    Flight::json(["message" => "Customer added Succesfully", "data" => Flight::customerService()->add(Flight::request()->data->getData())]);
+Flight::route("POST /customers/register", function () {
+    Flight::json(["message" => "Customer registered Succesfully", "data" => Flight::customerService()->add(Flight::request()->data->getData())]);
 });
 
 Flight::route("POST /customers/login", function () {
@@ -38,7 +38,7 @@ Flight::route("POST /customers/login", function () {
         error_log(json_encode($customer));
 
         // Verify the password   && password_verify($data['password'], $customer['password'])
-        if ($customer) {
+        if ($customer && password_verify($data['password'], $customer['password'])) {
             $tokenData = [
                 "customer_id" => $customer['id'],
                 "email" => $customer['email'],

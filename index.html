@@ -32,13 +32,19 @@
     <link href="assets/css/index.css" rel="stylesheet" />
     <!--login.css-->
     <link href="assets/css/login.css" rel="stylesheet" />
+    <!--register.css-->
+    <link href="assets/css/register.css" rel="stylesheet" />
     <!--reservation.css-->
     <link href="assets/css/reservation.css" rel="stylesheet" />
+    <!--menu.css-->
+    <link href="assets/css/menu.css" rel="stylesheet" />
 
     <!--index.js-->
     <script src="assets/js/index.js" type="text/javascript"></script>
     <!--login.js-->
     <script src="assets/js/login.js" type="text/javascript"></script>
+    <!--register.js-->
+    <script src="assets/js/register.js" type="text/javascript"></script>
     <!--reservation.js-->
     <script src="assets/js/reservation.js" type="text/javascript"></script>
     <!--menu.js-->
@@ -57,6 +63,11 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <!--Font awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
     <title>Document</title>
     <style>
@@ -77,49 +88,74 @@
   </head>
   <body>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg bg-light fixed-top mb-4" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <i class="material-icons text-success" style="font-size: 34px"
-            >local_cafe</i
+    <nav class="mb-3">
+      <a href="#home">
+        <div class="logo">
+          <img
+            src="./assets/images/logo.png"
+            alt="logo"
+            height="50px"
+            width="50px"
+          />
+        </div>
+      </a>
+
+      <div class="openMenu"><i class="fa fa-bars"></i></div>
+      <div class="closeMenu" id="closeMenu"><i class="fa fa-times"></i></div>
+
+      <ul class="mainMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#reservation">Make Reservation</a></li>
+        <li><a href="#aboutUs">About Us</a></li>
+        <li id="adminLink" style="display: none" class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="adminDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-        </a>
-        <!-- For smaller screens -->
-        <button
-          class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-dark text-white rounded"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="material-icons">menu</i>
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto" id="tabs">
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
+            Admin Dashboard <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+            <li>
+              <a class="dropdown-item" href="adminBooking.html"
+                >Manage Bookings</a
+              >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#menu">Our Menu</a>
+            <li>
+              <a class="dropdown-item" href="adminMenu.html"
+                >Manage Menu Items</a
+              >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#reservation">Make Reservation</a>
-            </li>
-            <!-- Conditional links based on user role -->
-            <li class="nav-item" id="adminLink" style="display: none">
-              <a class="nav-link" href="#admin">Admin Dashboard</a>
-            </li>
-            <!-- End of conditional links -->
-            <li class="nav-item">
-              <a class="nav-link" href="#login">Login</a>
+            <!-- Add more admin options here -->
+          </ul>
+        </li>
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Profile <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#bookings">Bookings</a></li>
+            <li id="loginLogoutBtn">
+              <a class="dropdown-item" href="#login">Login</a>
             </li>
           </ul>
-        </div>
-      </div>
+        </li>
+        <!-- End Profile Dropdown -->
+      </ul>
     </nav>
+
     <!--SPAPP-->
     <div id="AppContainer"></div>
 
@@ -127,7 +163,9 @@
     <div style="background-color: #ffa500" id="footer">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 d-flex justify-content-end align-items-center">
+          <div
+            class="col-md-6 d-flex align-items-center justify-content-center"
+          >
             <img
               src="./assets/images/footer.png"
               alt="cook"
@@ -135,9 +173,7 @@
               style="max-height: 150px; max-width: 100%"
             />
           </div>
-          <div
-            class="col-md-6 p-3 d-flex flex-column justify-content-start align-items-start"
-          >
+          <div class="col-md-6 p-3 d-flex flex-column align-items-start">
             <p class="mb-0 text-black">Phone: +61 2 1234 5678</p>
             <p class="mb-0 text-black">
               Address: 7890 Oak Lane, Sydney, NSW 2000, Australia
@@ -158,18 +194,10 @@
       var file = "tpl/" + hash + ".html";
       $("#AppContainer").load(file);
     } else {
-      var defaultFile = "tpl/home.html"; // Set the default file here
+      var defaultFile = "tpl/login.html"; // Set the default file here
       $("#AppContainer").load(defaultFile);
     }
   };
   window.onhashchange = HashChange;
   HashChange();
-
-  //CustomerService.init();
-
-  // JWT token
-  var token = localStorage.getItem("token");
-  if (!token) {
-    window.location.replace("index.html#login");
-  }
 </script>

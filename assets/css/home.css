@@ -1,0 +1,4 @@
+.btn-link {
+  text-decoration: none; /* Remove underline */
+  outline: none; /* Remove outline on focus */
+}

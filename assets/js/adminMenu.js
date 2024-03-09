@@ -6,7 +6,9 @@ function getAllMenuItems() {
       html +=
         '<div class="col-lg-4 mb-2">' +
         '<div class="card">' +
-        '<img src="./assets/images/food1.jpg" class="card-img-top" alt="..." />' +
+        '<img src="assets/images/' +
+        data[i].image_url +
+        '" class="card-img-top" alt="Menu Item Image" />' +
         '<div class="card-body">' +
         '<h5 class="card-title">' +
         data[i].foodName +
@@ -88,12 +90,14 @@ $(document).ready(function () {
       foodPrice: "required",
       foodType: "required",
       description: "required",
+      image_url: "required",
     },
     messages: {
       foodName: "Please enter food Name",
       foodPrice: "Please enter food Price",
       foodType: "Please enter food Type",
       description: "Please enter food description",
+      image_url: "Please enter valid image url",
     },
   });
 
@@ -132,7 +136,6 @@ function deleteMenuItem() {
       $("#deleteMenuItemModal").modal("hide");
       toastr.success(response.message);
       getAllMenuItems();
-      alert("deleted");
     },
     error: function (XMLHttpRequest, textStatus, errorThrow) {
       console.log("Error" + errorThrow);

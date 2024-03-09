@@ -14,9 +14,16 @@ class CustomersDao extends BaseDao
   // Override add method to hash password
   public function add($customer)
   {
-    $customer['password'] = md5($customer['password']);
+    // Hash the password using password_hash()
+    $hashedPassword = password_hash($customer['password'], PASSWORD_DEFAULT);
+
+    // Replace the plain password with the hashed password
+    $customer['password'] = $hashedPassword;
+
+    // Call the parent add method
     return parent::add($customer);
   }
+
 
 
 

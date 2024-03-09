@@ -23,29 +23,99 @@ body {
   gap: 15px;
 }
 
-.navbar {
-  position: sticky;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ul {
+  margin-bottom: 0;
+}
+nav {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
   top: 0;
-  z-index: 1000; /* Ensure it's above other elements */
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  height: 4rem;
+  position: sticky;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+nav .mainMenu {
+  display: flex;
+  list-style: none;
+}
+nav .mainMenu li {
+  display: inline-block;
 }
 
-.navbar-nav .nav-link {
-  color: #000000;
-  font-size: 15px;
+nav .mainMenu li a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 1.1rem;
+  margin-right: 20px;
 }
 
-.navbar-nav .nav-link:hover {
-  color: #198754;
+nav .mainMenu li a:hover {
+  color: rgb(41, 122, 56);
+  cursor: pointer;
+}
+
+.logo {
+  margin-left: 15px;
+}
+
+nav .openMenu {
+  font-size: 2rem;
+  margin: 20px;
+  display: none;
+  cursor: pointer;
+}
+
+#closeMenu {
+  display: none;
+  z-index: 100;
+}
+
+@media (max-width: 800px) {
+  nav .mainMenu {
+    height: 400px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    transition: top 1s ease;
+    display: none;
+  }
+  nav .mainMenu .closeMenu {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  nav .openMenu {
+    display: block;
+  }
+  nav .mainMenu li a:hover {
+    color: green;
+    cursor: pointer;
+  }
 }
 
 #text-over-image {
   font-family: "Playfair Display", serif;
-  -webkit-text-stroke: 1px #ffffff; /* Black outline */
-  font-size: 7rem;
-  color: #000000;
+  -webkit-text-stroke: 1px #000000; /* Black outline */
+  font-size: 6rem;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -58,4 +128,8 @@ body {
   right: 0;
   left: 0;
   bottom: 0;
+}
+#footerImg {
+  display: flex;
+  justify-content: center;
 }
