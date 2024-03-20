@@ -7,24 +7,28 @@ function getAllBookings() {
     var html = "";
     for (let i = 0; i < data.length; i++) {
       html +=
-        '<div class="card" style="width: 18rem">' +
+        '<div class="col-lg-4 col-md-6 col-sm-12 mb-3">' +
+        '<div class="card" style="width: 18rem;">' +
         '<ul class="list-group list-group-flush">' +
-        '<li class="list-group-item"> Booking id: ' +
+        '<li class="list-group-item">Booking id: ' +
         data[i].id +
         "</li>" +
-        '<li class="list-group-item"> Table Number: ' +
+        '<li class="list-group-item">Table Number: ' +
         data[i].tableId +
         "</li>" +
-        '<li class="list-group-item"> Customer ID: ' +
+        '<li class="list-group-item">Customer ID: ' +
         data[i].customerId +
         "</li>" +
         "</ul>" +
-        "<div>" +
-        "<i class='material-icons' onclick='openConfirmationDialog(" +
+        '<div><i class="material-icons" onclick="openConfirmationDialog(' +
         data[i].id +
-        ")'>delete</i>";
+        ')">delete</i></div>' +
+        "</div>" +
+        "</div>";
     }
-    $("#bookings").html(html);
+    $("#bookings").html(
+      '<div class="container"><div class="row">' + html + "</div></div>"
+    );
   });
 }
 

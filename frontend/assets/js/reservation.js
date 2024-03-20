@@ -11,13 +11,23 @@ getAllTables();
 $(document).ready(function () {
   // Initialize form validation
   $("#reservationForm").validate({
+    // Specify validation rules
     rules: {
-      email: "required",
+      email: {
+        required: true,
+        email: true,
+      },
       table: "required",
+      reservationDate: "required",
     },
+    // Specify validation error messages
     messages: {
-      email: "Please enter correct email",
-      table: "Please select table number",
+      email: {
+        required: "Please enter an email address",
+        email: "Please enter a valid email address",
+      },
+      table: "Please select a table number",
+      reservationDate: "Please enter a reservation date",
     },
   });
 
@@ -44,6 +54,7 @@ $(document).ready(function () {
     }
   });
 });
+
 // Ajax to load all tables from database
 function getAllTables() {
   $.get("rest/restauranttables", function (data) {

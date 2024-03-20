@@ -20,6 +20,7 @@ class BookingsDao extends BaseDao
         // Modify the entity before passing it to parent add method
         $booking['customerId'] = $customerId;
         $booking['tableId'] = $tableId;
+        $booking['reservationDate'] = $entity['reservationDate'];
 
         // Call parent add method to insert into database
         return parent::add($booking);

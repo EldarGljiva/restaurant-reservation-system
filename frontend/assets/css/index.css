@@ -1,26 +1,7 @@
-html {
-  height: 100%;
-}
-
 body {
   position: relative;
   margin: 0;
   min-height: 100%;
-}
-
-.flex-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
 }
 
 * {
@@ -28,9 +9,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
 ul {
   margin-bottom: 0;
 }
+
 nav {
   background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
@@ -42,10 +25,11 @@ nav {
   position: sticky;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 nav .mainMenu {
-  display: flex;
   list-style: none;
 }
+
 nav .mainMenu li {
   display: inline-block;
 }
@@ -78,7 +62,7 @@ nav .openMenu {
   z-index: 100;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 950px) {
   nav .mainMenu {
     height: 400px;
     position: fixed;
@@ -92,6 +76,7 @@ nav .openMenu {
     background: rgb(255, 255, 255);
     transition: top 1s ease;
     display: none;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   }
   nav .mainMenu .closeMenu {
     display: block;
@@ -99,12 +84,24 @@ nav .openMenu {
     top: 20px;
     right: 20px;
   }
+  .closeMenu i {
+    font-size: 1.5rem;
+    margin-right: 20px;
+  }
+  nav .mainMenu li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+  }
   nav .openMenu {
     display: block;
   }
   nav .mainMenu li a:hover {
     color: green;
     cursor: pointer;
+  }
+  h1 {
+    font-size: 3rem !important;
   }
 }
 
@@ -118,18 +115,18 @@ nav .openMenu {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 3rem !important;
-  }
-}
-
 #footer {
   right: 0;
   left: 0;
   bottom: 0;
+  flex-shrink: 0;
 }
+
 #footerImg {
   display: flex;
   justify-content: center;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: transparent !important; /* Change the background color to transparent */
 }

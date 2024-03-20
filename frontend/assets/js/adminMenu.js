@@ -4,11 +4,11 @@ function getAllMenuItems() {
     var html = "";
     for (let i = 0; i < data.length; i++) {
       html +=
-        '<div class="col-lg-4 mb-2">' +
+        '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
         '<div class="card">' +
         '<img src="assets/images/' +
         data[i].image_url +
-        '" class="card-img-top" alt="Menu Item Image" />' +
+        '" class="card-img-top menu-item-image" alt="Menu Item Image" />' +
         '<div class="card-body">' +
         '<h5 class="card-title">' +
         data[i].foodName +
@@ -18,13 +18,17 @@ function getAllMenuItems() {
         "</p>" +
         "</div>" +
         "</div>" +
-        "</div>" +
-        "<button class='btn btn-danger' onClick='openConfirmationDialog(" +
+        '<div class="row">' +
+        '<div class="col d-flex justify-content-center">' +
+        "<button class='btn btn-danger m-3' onClick='openConfirmationDialog(" +
         data[i].id +
         ")'>Delete</button>" +
-        "<button class='btn btn-info' onclick='showEditMenuItems(" +
+        "<button class='btn btn-info m-3' onclick='showEditMenuItems(" +
         data[i].id +
-        ")'>Edit</button>";
+        ")'>Edit</button>" +
+        "</div>" +
+        "</div>" +
+        "</div>";
     }
     $("#menuItems").html(html);
   });
