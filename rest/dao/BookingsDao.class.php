@@ -10,6 +10,16 @@ class BookingsDao extends BaseDao
         parent::__construct("booking");
     }
 
+
+    // Override getById method to display all bookings with customer id 
+    public function getAllBookingsById($email)
+    {
+        $id = $this->getCustomerIdByEmail($email);
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("SELECT * FROM booking WHERE customerId = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Override the add method for specific behavior related to bookings
     public function add($entity)
     {

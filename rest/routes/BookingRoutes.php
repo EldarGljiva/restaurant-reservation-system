@@ -10,6 +10,11 @@ Flight::route("GET /bookings/@id", function ($id) {
     Flight::json(Flight::bookingService()->getById($id));
 });
 
+// Route used to get booking by customer id from db
+Flight::route("GET /bookings/customers/@email", function ($email) {
+    Flight::json(Flight::bookingService()->getAllBookingsById($email));
+});
+
 // Route used to delete booking by id from db
 Flight::route("DELETE /bookings/@id", function ($id) {
     Flight::json(["message" => "booking Deleted Succesfully", "data" => Flight::bookingService()->delete($id)]);
