@@ -16,27 +16,23 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <!-- toastr css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css"
-    />
+     <!-- toastr css -->
+     <link
+     rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css"
+   />
     <!-- index.css -->
     <link href="assets/css/index.css" rel="stylesheet" />
-    <!-- menu.css -->
-    <link href="assets/css/menu.css" rel="stylesheet" />
-    <!-- register.css -->
+     <!-- menu.css -->
+     <link href="assets/css/menu.css" rel="stylesheet" />
+     <!-- register.css -->
     <link href="assets/css/login.css" rel="stylesheet" />
     <!-- login.css -->
     <link href="assets/css/register.css" rel="stylesheet" />
     <!-- reservation.css -->
     <link href="assets/css/reservation.css" rel="stylesheet" />
-    <!-- adminBooking.css -->
-    <link href="assets/css/adminBooking.css" rel="stylesheet" />
-    <!-- adminMenu.css -->
-    <link href="assets/css/adminMenu.css" rel="stylesheet" />
-    <!-- Include jwt_decode for decoding JWT tokens -->
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <!-- bookings.css -->
+    <link href="assets/css/bookings.css" rel="stylesheet" />
     <!-- PlayFair font style -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,15 +45,16 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-
     <!--Font awesome-->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
     <!-- spapp.css -->
-    <link rel="stylesheet" href="assets/css/spapp.css" />
+    <link rel="stylesheet" href="assets/css/spapp.css"/>
     <title>Chef's Restaurant</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
   </head>
   <body>
     <!-- NavBar -->
@@ -81,24 +78,27 @@
         <li><a href="#menu">Our Menu</a></li>
         <li><a href="#reservation">Make Reservation</a></li>
         <li><a href="#aboutUs">About Us</a></li>
-        <!-- Admin dashboard -->
-        <li class="nav-item dropdown" id="adminDropdown" hidden>
-          <a
+        <li id="adminLink" style="display: none" class="nav-item dropdown">
+          <as
             class="nav-link dropdown-toggle"
             href="#"
-            id="navbarDropdown"
+            id="adminDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
             Admin Dashboard <i class="bi bi-chevron-down"></i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" aria-labelledby="adminDropdown">
             <li>
-              <a class="dropdown-item" href="#adminBookings">Manage Bookings</a>
+              <a class="dropdown-item" href="#adminBookings"
+                >Manage Bookings</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="#adminMenu">Manage Menu Items</a>
+              <a class="dropdown-item" href="#adminMenuItems"
+                >Manage Menu Items</a
+              >
             </li>
           </ul>
         </li>
@@ -133,70 +133,75 @@
       <section id="bookings" data-load="bookings.html"></section>
       <section id="login" data-load="login.html"></section>
       <section id="register" data-load="register.html"></section>
-      <section id="adminBooking" data-load="adminBooking.html"></section>
-      <section id="adminMenu" data-load="adminMenu.html"></section>
     </main>
     <!-- Footer -->
     <div style="background-color: #ffa500" id="footer">
-      <div class="container">
-        <div class="row">
-          <div
-            class="col-md-6 d-flex align-items-center justify-content-center"
-          >
-            <img
-              src="./assets/images/footer.png"
-              alt="cook"
-              class="img-fluid"
-              style="max-height: 150px; max-width: 100%"
-            />
-          </div>
-          <div class="col-md-6 p-3 d-flex flex-column align-items-start">
-            <p class="mb-0 text-black">Phone: +61 2 1234 5678</p>
-            <p class="mb-0 text-black">
-              Address: 7890 Oak Lane, Sydney, NSW 2000, Australia
-            </p>
-            <p class="mb-0 text-black">Email: info@company.com</p>
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-md-6 d-flex align-items-center justify-content-center"
+            >
+              <img
+                src="./assets/images/footer.png"
+                alt="cook"
+                class="img-fluid"
+                style="max-height: 150px; max-width: 100%"
+              />
+            </div>
+            <div class="col-md-6 p-3 d-flex flex-column align-items-start">
+              <p class="mb-0 text-black">Phone: +61 2 1234 5678</p>
+              <p class="mb-0 text-black">
+                Address: 7890 Oak Lane, Sydney, NSW 2000, Australia
+              </p>
+              <p class="mb-0 text-black">Email: info@company.com</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Jquery validator -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
-      integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <!-- toastr js -->
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <!-- Jquery Validator-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- spapp js -->
     <script src="assets/js/jquery.spapp.js"></script>
     <script src="assets/js/jquery.spapp.min.js"></script>
     <!-- spapp -->
     <script>
-      var app = $.spapp({ templateDir: "assets/html/" });
+      var app = $.spapp({templateDir:"pages/"});
       app.run();
     </script>
+    <!-- block-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/block-ui@2.70.1/jquery.blockUI.min.js">
+      /* 
+      $('body').block({ 
+        message: '<div class="spinner-border text-primary" role="status"></div>', // Need to wrap the HTML in quotes
+        css: {
+          backgroundColor: 'transparent',
+          color: '0'
+        },
+        overlayCSS: { // This should be inside the block function, not separate
+          backgroundColor: '#000',
+          opacity: 0.25
+        }3
+      });
 
+       */
+    </script>
+    <!-- toastr js -->
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    
     <!-- index.js-->
-    <script src="assets/js/index.js" type="module"></script>
-    <!-- home.js -->
-    <script src="assets/js/home.js"></script>
+    <script src="assets/js/index.js"></script>
     <!-- menu.js -->
-    <script src="assets/js/menu.js"></script>
-    <!-- login.js -->
-    <script src="assets/js/login.js"></script>
-    <!-- register.js -->
-    <script src="assets/js/register.js"></script>
-    <!-- reservation.js -->
-    <script src="assets/js/reservation.js"></script>
+    <script src="services/menu.js"></script>
     <!-- bookings.js -->
-    <script src="assets/js/bookings.js"></script>
-    <!-- adminBookings.js -->
-    <script src="assets/js/adminBooking.js"></script>
-    <!-- adminMenu.js -->
-    <script src="assets/js/adminMenu.js"></script>
+    <script src="services/bookings.js"></script>
+    <!-- login.js -->
+    <script src="services/login.js"></script>
+    <!-- register.js -->
+    <script src="services/register.js"></script>
+    <!-- reservation.js -->
+    <script src="services/reservation.js"></script>
   </body>
 </html>

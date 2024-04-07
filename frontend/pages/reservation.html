@@ -1,3 +1,4 @@
+<!--Reservation page content-->
 <div
   class="container d-flex justify-content-center align-items-center min-vh-100"
 >
@@ -24,8 +25,7 @@
           </p>
         </div>
         <!--Email-->
-        <div class="form-group mb-3">
-          <label for="email">Email address</label>
+        <div class="input-group mb-3">
           <input
             type="email"
             id="email"
@@ -35,15 +35,12 @@
           />
         </div>
         <!-- Number of Table -->
-        <div class="form-group mb-3">
-          <label for="table">Table Number</label>
-          <select class="form-select" id="table" name="table">
-            <!-- Options -->
-          </select>
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="table">Table Number</label>
+          <select class="form-select" id="table" name="table"></select>
         </div>
         <!--Date-->
-        <div class="form-group mb-3">
-          <label for="reservationDate">Reservation Date</label>
+        <div class="input-group mb-3">
           <input
             type="date"
             class="form-control"
@@ -51,15 +48,9 @@
             id="reservationDate"
             name="reservationDate"
           />
-          <input
-            type="hidden"
-            id="reservationDateHidden"
-            name="reservationDateHidden"
-          />
         </div>
-
         <!--Button-->
-        <div class="form-group mb-3">
+        <div class="input-group mb-3">
           <button type="submit" class="btn btn-success w-100 fs-6">
             Submit
           </button>

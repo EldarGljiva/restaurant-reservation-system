@@ -19,6 +19,7 @@ class CustomersDao extends BaseDao
 
     // Replace the plain password with the hashed password
     $customer['password'] = $hashedPassword;
+    $customer['role'] = 'customer';
 
     // Call the parent add method
     return parent::add($customer);
