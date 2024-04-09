@@ -26,7 +26,7 @@ var MenuItemsService = {
           }
         }
       } else {
-        output = "No menu items found."; // Handle empty response
+        output = "No menu items found.";
       }
       // Log menuitems array to console
       console.log("data: ", menuitems);
@@ -44,7 +44,7 @@ var MenuItemsService = {
           output +=
             '<div class="col-lg-4 col-md-4 mb-2">' +
             '<div class="card">' +
-            '<img src="images/' +
+            '<img src="' +
             item.image_url +
             '" class="card-img-top img-fluid" alt="food"/>' +
             '<div class="card-body">' +
