@@ -96,7 +96,6 @@
                 id="foodName"
                 name="foodName"
                 class="form-control"
-                required
               />
               <label for="foodPrice">Price:</label>
               <input
@@ -104,15 +103,9 @@
                 id="foodPrice"
                 name="foodPrice"
                 class="form-control"
-                required
               />
               <label for="foodType">Food Type:</label>
-              <select
-                id="foodType"
-                name="foodType"
-                class="form-control"
-                required
-              >
+              <select id="foodType" name="foodType" class="form-control">
                 <option value="Main Courses">Main Courses</option>
                 <option value="Side Dishes">Side Dishes</option>
                 <option value="Desserts">Desserts</option>
@@ -124,7 +117,6 @@
                 id="description"
                 name="description"
                 class="form-control"
-                required
               />
               <label for="image_url">Image URL:</label>
               <input
@@ -132,7 +124,6 @@
                 id="image_url"
                 name="image_url"
                 class="form-control"
-                required
               />
             </div>
           </div>
@@ -177,3 +168,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  adminService.getMenuItems();
+  adminService.init();
+  $("#editMenuItemForm").submit(function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    adminService.editMenuItem();
+  });
+
+  $("#deleteMenuItemModal").on("click", ".btn-danger", function () {
+    adminService.deleteMenuItem();
+  });
+</script>

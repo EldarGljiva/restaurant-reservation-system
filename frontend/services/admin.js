@@ -128,7 +128,8 @@ var adminService = {
         },
       },
       submitHandler: function (form, event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
         $("body").block({
           message:
@@ -196,18 +197,3 @@ function openConfirmationDialog(itemId) {
   $("#deleteMenuItemModal").modal("show");
   $("#delete_menuItem_id").val(itemId);
 }
-
-// Call the function to get and display menu items
-adminService.getMenuItems();
-
-$(document).ready(function () {
-  adminService.init();
-  $("#editMenuItemForm").submit(function (event) {
-    event.preventDefault(); // Prevent default form submission
-    adminService.editMenuItem();
-  });
-
-  $("#deleteMenuItemModal").on("click", ".btn-danger", function () {
-    adminService.deleteMenuItem();
-  });
-});

@@ -4,7 +4,10 @@ var reservationService = {
 
   // Set the minimum date for the input field
   setMinDate: function () {
-    document.getElementById("reservationDate").setAttribute("min", this.today);
+    var reservationDateInput = document.getElementById("reservationDate");
+    if (reservationDateInput) {
+      reservationDateInput.setAttribute("min", this.today);
+    }
   },
 
   // Get all tables and populate the select dropdown
@@ -51,6 +54,7 @@ var reservationService = {
       },
       submitHandler: function (form, event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         $("body").block({
           message:
             '<div class="spinner-border text-primary" role="status"></div>',
@@ -68,16 +72,16 @@ var reservationService = {
         let data = reservationService.serializeForm(form);
         $.ajax({
           type: "POST",
-          url: "../rest/bookings", // Endpoint for making a reservation
+          url: "../rest/reservations",
           data: data,
           success: function (response) {
-            $("body").unblock();
             toastr.success("Reserved Successfully");
             // Clear form
             $("#reservationForm")[0].reset();
 
             // Update the displayed bookings after successful reservation
             reservationService.getBookings();
+            $("body").unblock();
           },
           error: function (xhr, status, error) {
             $("body").unblock();
@@ -98,43 +102,38 @@ var reservationService = {
   },
 
   // Display existing reservations
-  displayReservations: function (bookings) {
-    let output = "";
-    for (let i = 0; i < bookings.length; i++) {
-      let item = bookings[i];
-      output +=
-        '<div class="booking-box col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-2">' +
-        '<div class="card">' +
-        '<div class="card-body">' +
-        '<h5 class="card-title"> Customer ID: ' +
-        item.customerId +
-        "</h5>" +
-        '<p class="card-text"> Table ID: ' +
-        item.tableId +
-        "</p>" +
-        '<p class="card-text"> <span style="color: green; font-weight: bold; display:block">Reservation Date</span> ' +
-        item.reservationDate +
-        "</p>" +
-        "</div>" +
-        "</div>" +
-        "</div>";
-    }
-
-    $("#bookingsContent").html(output);
-  },
-
-  // Get existing bookings
-  getBookings: function () {
-    $.get("../rest/bookings", (bookings) => {
-      reservationService.displayReservations(bookings);
+  getReservations: function () {
+    $.get("../rest/reservations", (data) => {
+      console.log("pocinjemo");
+      let html = "";
+      if (data) {
+        for (let i = 0; i < data.length; i++) {
+          let item = data[i];
+          html +=
+            '<div class="booking-box col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-2">' +
+            '<div class="card">' +
+            '<div class="card-body">' +
+            '<h5 class="card-title"> Customer ID: ' +
+            item.customerId +
+            "</h5>" +
+            '<p class="card-text"> Table ID: ' +
+            item.tableId +
+            "</p>" +
+            '<p class="card-text"> <span style="color: green; font-weight: bold; display:block">Reservation Date</span> ' +
+            item.reservationDate +
+            "</p>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        }
+      } else {
+        html = "No reservations found.";
+      }
+      console.log("data: ", data);
+      $("#reservationsContent").html(html);
     });
   },
 };
-
-// Initialize reservationService
-$(document).ready(function () {
-  reservationService.setMinDate();
-  reservationService.getAllTables();
-  reservationService.initFormValidation();
-  reservationService.getBookings();
-});
+reservationService.setMinDate();
+reservationService.initFormValidation();
+reservationService.getReservations();

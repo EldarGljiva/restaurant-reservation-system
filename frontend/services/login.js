@@ -20,6 +20,7 @@ var loginService = {
       },
       submitHandler: function (form, event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         $("body").block({
           message:
             '<div class="spinner-border text-primary" role="status"></div>',
@@ -64,6 +65,3 @@ var loginService = {
     return jsonResult;
   },
 };
-
-// Initialize loginService
-loginService.init();

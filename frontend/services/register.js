@@ -1,6 +1,6 @@
 var registerService = {
   // Initialize form validation
-  initFormValidation: function () {
+  init: function () {
     $("#registerForm").validate({
       rules: {
         fName: { required: true, minlength: 2 },
@@ -36,6 +36,7 @@ var registerService = {
       },
       submitHandler: function (form, event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         $("body").block({
           message:
             '<div class="spinner-border text-primary" role="status"></div>',
@@ -83,8 +84,3 @@ var registerService = {
     return jsonResult;
   },
 };
-
-// Calling functions to initialize
-$(document).ready(function () {
-  registerService.initFormValidation();
-});

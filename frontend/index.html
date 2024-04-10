@@ -90,7 +90,9 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="adminDropdown">
             <li>
-              <a class="dropdown-item" href="#adminBookings">Manage Bookings</a>
+              <a class="dropdown-item" href="#adminReservations"
+                >Manage Reservations</a
+              >
             </li>
             <li>
               <a class="dropdown-item" href="#adminMenu">Manage Menu Items</a>
@@ -110,7 +112,9 @@
             Profile <i class="bi bi-chevron-down"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#bookings">Bookings</a></li>
+            <li>
+              <a class="dropdown-item" href="#reservations">Reservations</a>
+            </li>
             <li id="loginLogoutBtn">
               <a class="dropdown-item" href="#login">Login</a>
             </li>
@@ -124,11 +128,14 @@
       <section id="menu" data-load="menu.html"></section>
       <section id="reservation" data-load="reservation.html"></section>
       <section id="aboutUs" data-load="aboutUs.html"></section>
-      <section id="bookings" data-load="bookings.html"></section>
+      <section id="reservations" data-load="reservations.html"></section>
       <section id="login" data-load="login.html"></section>
       <section id="register" data-load="register.html"></section>
       <section id="adminMenu" data-load="adminMenu.html"></section>
-      <section id="adminBookings" data-load="adminBooking.html"></section>
+      <section
+        id="adminReservations"
+        data-load="adminReservations.html"
+      ></section>
     </main>
     <!-- Footer -->
     <div style="background-color: #ffa500" id="footer">
@@ -169,7 +176,7 @@
     <script src="assets/js/jquery.spapp.min.js"></script>
     <!-- spapp -->
     <script>
-      var app = $.spapp({ templateDir: "pages/" });
+      var app = $.spapp({ defaultView: "#home", templateDir: "pages/" });
       app.run();
     </script>
     <!-- block-ui -->

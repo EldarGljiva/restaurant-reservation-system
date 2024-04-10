@@ -2,21 +2,21 @@
 
 require_once __DIR__ . "/BaseDao.class.php";
 
-class BookingsDao extends BaseDao
+class ReservationsDao extends BaseDao
 {
     // Class constructor used to establish connection to db
     public function __construct()
     {
-        parent::__construct("booking");
+        parent::__construct("reservations");
     }
 
 
     // Override getById method to display all bookings with customer id 
-    public function getAllBookingsById($email)
+    public function getAllReservationsById($email)
     {
         $id = $this->getCustomerIdByEmail($email);
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM booking WHERE customerId = ?");
+        $stmt = $conn->prepare("SELECT * FROM reservations WHERE customerId = ?");
         $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -28,19 +28,19 @@ class BookingsDao extends BaseDao
         $tableId = $this->getTableIdByNumber($entity['table']);
 
         // Modify the entity before passing it to parent add method
-        $booking['customerId'] = $customerId;
-        $booking['tableId'] = $tableId;
-        $booking['reservationDate'] = $entity['reservationDate'];
+        $reservation['customerId'] = $customerId;
+        $reservation['tableId'] = $tableId;
+        $reservation['reservationDate'] = $entity['reservationDate'];
 
         // Call parent add method to insert into database
-        return parent::add($booking);
+        return parent::add($reservation);
     }
 
     // Additional methods specific to BookingsDao
     private function getCustomerIdByEmail($email)
     {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT id FROM customer WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id FROM customers WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetchColumn(); // fetchColumn() gets us a single value
     }
@@ -48,7 +48,7 @@ class BookingsDao extends BaseDao
     private function getTableIdByNumber($tableNumber)
     {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT id FROM restauranttable WHERE tableNumber = ?");
+        $stmt = $conn->prepare("SELECT id FROM restauranttables WHERE tableNumber = ?");
         $stmt->execute([$tableNumber]);
         return $stmt->fetchColumn();
     }

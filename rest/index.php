@@ -7,21 +7,21 @@ require "../vendor/autoload.php";
 require "services/CustomerService.php";
 require "services/MenuItemsService.php";
 require "services/RestaurantTableService.php";
-require "services/BookingService.php";
+require "services/ReservationService.php";
 require "services/PaymentService.php";
 
 // Register services with Flight
 Flight::register("customerService", "CustomerService");
 Flight::register("menuitemsService", "MenuItemsService");
 Flight::register("restauranttableService", "RestaurantTableService");
-Flight::register("bookingService", "BookingService");
+Flight::register("reservationService", "ReservationService");
 Flight::register("paymentService", "PaymentService");
 
 // Require all route files
 require_once("routes/CustomerRoutes.php");
 require_once("routes/MenuItemsRoutes.php");
 require_once("routes/RestaurantTableRoutes.php");
-require_once("routes/BookingRoutes.php");
+require_once("routes/ReservationRoutes.php");
 require_once("routes/PaymentRoutes.php");
 
 // Default route
