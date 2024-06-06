@@ -21,6 +21,13 @@ var loginService = {
       submitHandler: function (form, event) {
         event.preventDefault();
         event.stopImmediatePropagation();
+
+        var hcaptchaResponse = hcaptcha.getResponse();
+        if (!hcaptchaResponse) {
+          toastr.error("Please complete the captcha");
+          return;
+        }
+
         $("body").block({
           message:
             '<div class="spinner-border text-primary" role="status"></div>',
@@ -34,7 +41,9 @@ var loginService = {
             opacity: 0.25,
           },
         });
+
         let data = loginService.serializeForm(form);
+        data["h-captcha-response"] = hcaptchaResponse;
         $.ajax({
           type: "POST",
           url: "../rest/customers/login",
@@ -45,12 +54,16 @@ var loginService = {
           success: function (response) {
             $("body").unblock();
             if (response.token) {
-              localStorage.setItem("token", response.token);
-              toastr.success("Logged in successfully");
               // Clear form
               $("#loginForm")[0].reset();
+              event.preventDefault();
+              localStorage.setItem("token", response.token);
+              toastr.success("Logged in successfully");
+              // Redirect to #home
               window.location.href = "#home";
               location.reload();
+            } else if (response.message) {
+              toastr.error(response.message);
             } else {
               toastr.error("Token not received");
             }
@@ -58,12 +71,10 @@ var loginService = {
           error: function (xhr, status, error) {
             $("body").unblock();
             var errorMessage;
-            if (xhr.status === 401) {
-              errorMessage = "Invalid email or password";
-            } else if (xhr.status === 400) {
-              errorMessage = "Email and password are required";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
             } else {
-              errorMessage = "An error occurred";
+              errorMessage = "An error occurred.";
             }
             toastr.error(errorMessage);
             console.log(xhr.responseText);

@@ -1,7 +1,9 @@
 {
   "require": {
-    "mikecao/flight": "^3.2",
+    "mikecao/flight": "^3.10",
     "firebase/php-jwt": "^6.10",
-    "zircote/swagger-php": "3.3.7"
+    "zircote/swagger-php": "^4.9",
+    "giggsey/libphonenumber-for-php": "^8.13",
+    "spomky-labs/otphp": "^11.2"
   }
 }

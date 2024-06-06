@@ -23,4 +23,13 @@ class CustomersDao extends BaseDao
     // Call the parent add method
     return parent::add($customer);
   }
+  // Update otp_secret column in database
+  public function updateOtpSecret($customerId, $secret)
+  {
+    $db = $this->getConnection();
+    $stmt = $db->prepare("UPDATE customers SET otp_secret = :otp_secret WHERE id = :id");
+    $stmt->bindParam(':otp_secret', $secret);
+    $stmt->bindParam(':id', $customerId);
+    $stmt->execute();
+  }
 }

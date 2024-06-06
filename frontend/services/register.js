@@ -68,10 +68,10 @@ var registerService = {
           error: function (xhr, status, error) {
             $("body").unblock();
             var errorMessage;
-            if (xhr.status === 400) {
-              errorMessage = "Email is taken";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
             } else {
-              errorMessage = "An error occurred";
+              errorMessage = "An error occurred. Please try again later.";
             }
             toastr.error(errorMessage);
             console.log(xhr.responseText);

@@ -53,7 +53,10 @@
     <title>Chef's Restaurant</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/logo.png" />
+    <!-- Jwt decode -->
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <!-- HCaptcha -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   </head>
   <body>
     <!-- NavBar -->
@@ -155,12 +158,52 @@
             />
           </div>
           <div class="col-md-6 p-3 d-flex flex-column align-items-start">
-            <p class="mb-0 text-black">Phone: +61 2 1234 5678</p>
+            <p class="mb-0 text-black">Phone: +387 61 548 259</p>
             <p class="mb-0 text-black">
-              Address: 7890 Oak Lane, Sydney, NSW 2000, Australia
+              Address: Semizovac 22, Sarajevo, Bosnia & Herzegovina
             </p>
-            <p class="mb-0 text-black">Email: info@company.com</p>
+            <p class="mb-0 text-black">Email: chefs-restaurant@company.com</p>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal to verify the account -->
+    <div class="modal fade" id="validationModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="otpForm" action="#home" method="POST">
+            <div class="modal-header">
+              <h5 class="modal-title">Enter OTP Secret</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="otpSecret">OTP Secret:</label>
+                <input
+                  type="text"
+                  id="otpSecret"
+                  name="otpSecret"
+                  class="form-control"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <p>
+                Please Scan using authenticator app to obtain
+                verification code:
+              </p>
+              <div id="qrCodeContainer"></div>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
