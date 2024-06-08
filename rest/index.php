@@ -3,9 +3,6 @@
 // Include flightPHP
 require "../vendor/autoload.php";
 
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-
 // Require all service files
 require "services/CustomerService.php";
 require "services/MenuItemsService.php";
@@ -29,7 +26,10 @@ Flight::route('/*', function () {
         return true;
     }
     try {
-        $headers = Flight::request()->getHeaders();
+        $headers = getallheaders();
+        if (isset($headers['Authentication'])) {
+            return true;
+        }
         if (isset($headers['Authentication'])) {
             return true;
         }
