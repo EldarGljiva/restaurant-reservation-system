@@ -249,7 +249,6 @@ Flight::route("POST /customers/register", function () {
 
 Flight::route("POST /customers/login", function () {
     $data = Flight::request()->data->getData();
-    error_log(print_r($data, true));
 
     try {
         // Check if CAPTCHA response is provided and valid
