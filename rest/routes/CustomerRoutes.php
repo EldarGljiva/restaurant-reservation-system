@@ -6,6 +6,7 @@ use \Firebase\JWT\Key;
 require 'validateEmail.php';
 require 'validateMX.php';
 require 'validatePhone.php';
+require 'verify.php';
 
 // Route used to get all customers from db
 /**
@@ -251,38 +252,44 @@ Flight::route("POST /customers/login", function () {
     error_log(print_r($data, true));
 
     try {
-        // Check if email and password are provided
-        if (!empty($data['email']) && !empty($data['password'])) {
-            // Get customer by email from db
-            $customer = Flight::customerService()->getByEmail($data['email']);
+        // Check if CAPTCHA response is provided and valid
+        if (!empty($data['h-captcha-response']) && !verifyHCaptcha($data['h-captcha-response'])) {
+            Flight::json(["message" => "Captcha verification failed"], 400);
+            return;
+        } else {
+            // Check if email and password are provided
+            if (!empty($data['email']) && !empty($data['password'])) {
+                // Get customer by email from db
+                $customer = Flight::customerService()->getByEmail($data['email']);
 
-            // Verify the password 
-            if ($customer && password_verify($data['password'], $customer['password'])) {
-                if ($customer['email'] == $data['email']) {
+                // Verify the password 
+                if ($customer && password_verify($data['password'], $customer['password'])) {
+                    if ($customer['email'] == $data['email']) {
 
-                    // JWT secret key
-                    $secretKey = Config::JWT_SECRET();
+                        // JWT secret key
+                        $secretKey = Config::JWT_SECRET();
 
-                    // JWT payload data
-                    $payload = [
-                        'customer' => $customer,
-                        'iat' => time(),
-                        'exp' => time() + (60 * 60 * 24), // valid for a day
-                    ];
-                    // Generate JWT
-                    $jwt = JWT::encode($payload, $secretKey, 'HS256');
+                        // JWT payload data
+                        $payload = [
+                            'customer' => $customer,
+                            'iat' => time(),
+                            'exp' => time() + (60 * 60 * 24), // valid for a day
+                        ];
+                        // Generate JWT
+                        $jwt = JWT::encode($payload, $secretKey, 'HS256');
 
-                    // Send the JWT to the client
-                    Flight::json([
-                        "message" => "Customer Logged In Successfully",
-                        "token" => $jwt
-                    ], 200);
+                        // Send the JWT to the client
+                        Flight::json([
+                            "message" => "Customer Logged In Successfully",
+                            "token" => $jwt
+                        ], 200);
+                    }
+                } else {
+                    Flight::json(["message" => "Invalid email or password"], 401);
                 }
             } else {
-                Flight::json(["message" => "Invalid email or password"], 401);
+                Flight::json(["message" => "Email and password are required"], 400);
             }
-        } else {
-            Flight::json(["message" => "Email and password are required"], 400);
         }
     } catch (Exception $e) {
         Flight::json(["message" => "Captcha verification error: " . $e->getMessage()], 500);
