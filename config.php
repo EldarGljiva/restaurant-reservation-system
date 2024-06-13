@@ -42,6 +42,7 @@ class Config
         return Config::get_env("HCAPTCHA_SITE_KEY", "e82a6fc4-a47e-4738-9bc4-7ad44486cf74");
     }
 
+
     public static function get_env($name, $default)
     {
         return isset($_ENV[$name]) && trim($_ENV[$name]) !== "" ? $_ENV[$name] : $default;

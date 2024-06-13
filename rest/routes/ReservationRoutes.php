@@ -121,8 +121,32 @@ Flight::route("DELETE /reservations/@id", function ($id) {
  * )
  */
 Flight::route("POST /reservations", function () {
-    Flight::json(["message" => "reservation added Succesfully", "data" => Flight::reservationService()->add(Flight::request()->data->getData())]);
+    $data = Flight::request()->data->getData();
+
+    // Validate if reservationDate is provided in the request data
+    if (!isset($data['reservationDate'])) {
+        Flight::json(["error" => "Reservation date is required"], 400);
+        return;
+    }
+
+    // Check if reservationDate is already taken
+    $existingReservation = Flight::reservationService()->findByDate($data['reservationDate']);
+
+    if ($existingReservation) {
+        Flight::json(["error" => "Date for that reservation is already taken!"]);
+        return;
+    }
+
+    // If not taken, proceed to add reservation
+    $reservation = Flight::reservationService()->add($data);
+
+    if ($reservation) {
+        Flight::json(["message" => "Reservation added successfully", "data" => $reservation]);
+    } else {
+        Flight::json(["error" => "Failed to add reservation"], 500);
+    }
 });
+
 
 // Route used to edit reservation from db
 /**
@@ -167,5 +191,5 @@ Flight::route("POST /reservations", function () {
  * )
  */
 Flight::route("PUT /reservations/@id", function ($id) {
-    Flight::json(["message" => "reservation changed Successfully", "data" => Flight::reservationService()->update($id, Flight::request()->data->getData())]);
+    Flight::json(["message" => "reservation updated Successfully", "data" => Flight::reservationService()->update($id, Flight::request()->data->getData())]);
 });

@@ -22,12 +22,6 @@ var loginService = {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        var hcaptchaResponse = hcaptcha.getResponse();
-        if (!hcaptchaResponse) {
-          toastr.error("Please complete the captcha");
-          return;
-        }
-
         $("body").block({
           message:
             '<div class="spinner-border text-primary" role="status"></div>',
@@ -43,7 +37,6 @@ var loginService = {
         });
 
         let data = loginService.serializeForm(form);
-        data["h-captcha-response"] = hcaptchaResponse;
         $.ajax({
           type: "POST",
           url: "../rest/customers/login",
