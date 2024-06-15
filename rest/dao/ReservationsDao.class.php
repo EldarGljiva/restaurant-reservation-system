@@ -47,6 +47,7 @@ class ReservationsDao extends BaseDao
         $reservation['tableId'] = $tableId;
         $reservation['reservationDate'] = $entity['reservationDate'];
         $reservation['tableNumber'] = $entity['table'];
+        $reservation['numberOfSeats'] = $entity['numberOfSeats'];
 
         // Call parent add method to insert into database
         return parent::add($reservation);

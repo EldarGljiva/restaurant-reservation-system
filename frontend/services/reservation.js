@@ -26,8 +26,12 @@ var reservationService = {
             html +=
               '<option value="' +
               item.tableNumber +
+              '" data-seats="' +
+              item.numberOfSeats +
               '">' +
               item.tableNumber +
+              " seats: " +
+              item.numberOfSeats +
               "</option>";
           }
         }
@@ -64,6 +68,7 @@ var reservationService = {
         tableNumber: "Please select a table",
         reservationDate: "Please select a date",
       },
+
       submitHandler: function (form, event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -82,6 +87,7 @@ var reservationService = {
         });
 
         let data = reservationService.serializeForm(form);
+        data.numberOfSeats = $("#table option:selected").data("seats");
         $.ajax({
           type: "POST",
           url: "../rest/reservations",
@@ -161,6 +167,9 @@ var reservationService = {
               '<div class="card-body">' +
               '<p class="card-text"> Table Number: ' +
               item.tableNumber +
+              "</p>" +
+              '<p class="card-text"> Number of Seats: ' +
+              item.numberOfSeats +
               "</p>" +
               '<p class="card-text"> <span style="color: green; font-weight: bold; display:block">Reservation Date</span> ' +
               item.reservationDate +
