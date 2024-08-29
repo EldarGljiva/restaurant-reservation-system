@@ -1,11 +1,11 @@
 <?php
 
 use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
 
 require 'validateEmail.php';
 require 'validateMX.php';
 require 'validatePhone.php';
+
 require 'verify.php';
 
 // Route used to get all customers from db
